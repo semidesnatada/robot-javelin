@@ -2,9 +2,9 @@
 
 This project solves the December 2025 Jane Street Puzzle [Robot Javelin](https://www.janestreet.com/puzzles/robot-javelin-index/).
 
-I solved this problem exactly on paper - using this project to test parts of my solution stage by stage, using Monte Carlo methods.
+I solved this problem exactly on paper - using this project to test parts of my solution stage by stage, using Monte Carlo methods. Doing this by hand was really fun and, because of that, I think this has been my favourite of Jane Street's puzzles so far.
 
-Therefore, there is a lot of mess in this file and it may be slightly hard to read. Some functions are also not super useful. And much of this can likely be optimised.
+This does mean that there is a lot of mess in this file and it may be slightly hard to read. Some functions are not super useful. And I imagine much of the code can likely be optimised.
 
 If you compile and run main.go as is, you will get the maximum probability of victory for the player who does not have access to the bit-spying technology, to around 5 d.p. This is not sufficient on its own for the puzzle, which requires 10 d.p. However, it provided me with enough confidence in my exact answer that I stopped there.
 
@@ -34,9 +34,9 @@ On paper, I broadly solved the puzzle as follows:
 
 > So, the spied on has become aware they are surveilled. Knowing that their opponent now has two different strategies depending on their own first roll, the spied on player should adopt two different strategies, depending on how their first roll went.
 
-> By this point, I had become used to doing what felt like endless algebra, and also didn't really have a great intuition for what the best strategy for the spied on player should be - so I just calculated the probability functions.
+> By this point, I had become used to doing endless algebra, and also didn't really have a great intuition for what the best strategy for the spied on player should be - so I just calculated the probability functions.
 
-> This yields two new thresholds for the player being spied on - a `t_low = 7 / 12` and `t_high = t*`. These produce a combined probability of victory for the spy player (using them just for consistency) of `p = 5 * sqrt5 / 16 - 37 / 192 = 0.5060629...`.
+> This yields two new thresholds for the player being spied on - a `t_low = 7 / 12` and `t_high = t*`. The low threshold should be used if the player rolls below `t*` and the high threshold if their first roll is above. These produce a combined probability of victory for the *spy* (just for consistency) of `p = 5 * sqrt5 / 16 - 37 / 192 = 0.5060629...`.
 
 > This means that the spied on player now has a better chance of winning, but it is still less than a `0.5`. In fact, their knowledge of being spied on only allows them to increase their win probability by `349/192 - 13 * sqrt5 / 16 = 0.0009031...`. 
 
