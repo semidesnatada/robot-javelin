@@ -2,7 +2,7 @@
 
 This project solves the December 2025 Jane Street Puzzle [Robot Javelin](https://www.janestreet.com/puzzles/robot-javelin-index/).
 
-I solved this problem exactly on paper - using this project to test parts of my solution stage by stage, using Monte Carlo methods. Doing this by hand was really fun and, because of that, I think this has been my favourite of Jane Street's puzzles so far.
+I solved this problem exactly on paper - using this project to test parts of my solution stage by stage, using Monte Carlo methods. Doing this by hand was really fun and I think my favourite of Jane Street's puzzles so far.
 
 This does mean that there is a lot of mess in this file and it may be slightly hard to read. Some functions are not super useful. And I imagine much of the code can likely be optimised.
 
@@ -16,9 +16,9 @@ On paper, I broadly solved the puzzle as follows:
 
 > The strategy for variant 1 has to be that players will re-roll if their first roll is below a threshold, `t`.
 
-> My initial guess here was that the Nash equilibrium occurs when the `expected value = t` - in other words, that a player re-rolls if their first roll is below their expected value. This equation yields a `t* = 0.61803 = (sqrt5 - 1 )/ 2`.
+> My initial guess here was that the Nash equilibrium occurs when the `expected value = t` - in other words, that a player re-rolls if their first roll is below their expected value. This equation yields a `t* = 0.61803 = (sqrt5 - 1 )/ 2`. This intuitively feels right, because if a player knows their first roll is greater than what they can expect to gain from their strategy in the long run, then they shouldn't risk a re-roll, which is more likely than not to get a lower value than they currently have. In the same line of reasoning, if they are already below their expected value after one roll, it doesn't make a great deal of sense to stick with that if we have a reasonable chance of improving by re-rolling.
 
-> I couldn't convince myself that this logic necessarily implies a Nash equilibrium, so derived the equations for the probability of win for a given player as a function of the threshold used by both players.
+> That said, I couldn't convince myself that this logic necessarily implies a Nash equilibrium. So, I derived the equations for the probability of win for a given player as a function of the threshold used by both players.
 
 > Under these equations, if one player picks a value of `t != t*`, then the other player can always find a threshold at which their probability of winning is greater than `0.5`. However, if one player chooses `t = t*`, the other player is guaranteed to have a win probability of less than `0.5`, or equal to `0.5` if they also pick `t*`. This is the definition of a Nash equilibrium!
 
@@ -43,3 +43,5 @@ On paper, I broadly solved the puzzle as follows:
 > But this makes intuitive sense. The spy's advantage is stronger as it gains higher quality / more information about the state of the game. The spy knows with certainty what the first roll of the other player was and the other player is simply doing what they can to minimise the impact of that extra information - it is reasonable to assume that the spy's advantage could only realistically be countered if the other player gains some information on the state of the spy's rolls.
 
 > Oh, and the solution to the puzzle is the complement of that final probability - `229/192 - 5 * sqrt5 / 16 = 0.4939370...`
+
+`Note: I may update this readme in future to include the exact equations for probability, including some visualisations - as these are really nice to look at, especially when interacting with them by varying thresholds.`
